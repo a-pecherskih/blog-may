@@ -1,0 +1,22 @@
+services:
+  blog-mysql:
+    container_name: blog-mysql
+    image: mariadb:11.7.2
+    volumes:
+      - ./mysql:/var/lib/mysql
+    env_file:
+      - ".env"
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    ports:
+      - "3306:3306"
+    restart: always
+    networks:
+      - blognet
+
+networks:
+  blognet:
+    driver: bridge
